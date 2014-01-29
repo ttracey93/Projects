@@ -1,0 +1,25 @@
+This project was created by Tyler Tracey (n00767255).
+I finished it on the night of the 22nd. (1/22/2013)
+
+The programs purpose is to create a hashing table. There are three classes 
+included in the .java file. The first class is the Item class. This class 
+just allows me to create an items that has both a string (its key) and an 
+int (its address). 
+
+The second class is the HashTable class. This class has some major 
+things. First of all it holds the Item array that acts as my actual hash 
+table. My original idea was to just have two arrays, one that held the 
+string(key) for each item and one that held the address of each item, but 
+instead I chose to make the Item class to hold both and just make an array 
+of those objects. This class also has all of the methods necessary for a 
+hashtable: insert(), find(), hash(), delete(), etc.
+
+The last class in the file I have titled HashTableMain. This is basically 
+the actual application. All it has is a main method. The main method opens 
+the file that the user of the program has specified and starts reading in 
+Items. For each Item read it makes an Item and deals with it according to 
+the project specifications. If the item does not exist in the array, it 
+hashes it and stores it at the best possible spot. If the items does exist 
+the program reports its location as well as the address accompanying it.
+
+Enjoy grading!

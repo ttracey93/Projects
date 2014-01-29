@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArdentDawn", "ArdentDawn\ArdentDawn\ArdentDawn.csproj", "{0BF2C266-3806-4A36-9F31-90A3CABB9859}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "ArdentDawnContent", "ArdentDawn\ArdentDawnContent\ArdentDawnContent.contentproj", "{D9FECEA8-DB7B-4A7D-9180-06096E6C4079}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BF2C266-3806-4A36-9F31-90A3CABB9859}.Debug|x86.ActiveCfg = Debug|x86
+		{0BF2C266-3806-4A36-9F31-90A3CABB9859}.Debug|x86.Build.0 = Debug|x86
+		{0BF2C266-3806-4A36-9F31-90A3CABB9859}.Release|x86.ActiveCfg = Release|x86
+		{0BF2C266-3806-4A36-9F31-90A3CABB9859}.Release|x86.Build.0 = Release|x86
+		{D9FECEA8-DB7B-4A7D-9180-06096E6C4079}.Debug|x86.ActiveCfg = Debug|x86
+		{D9FECEA8-DB7B-4A7D-9180-06096E6C4079}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

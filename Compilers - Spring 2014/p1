@@ -1,0 +1,3 @@
+#!/bin/ksh
+echo the input file is $1
+java LexicalAnalyzer2 $1
