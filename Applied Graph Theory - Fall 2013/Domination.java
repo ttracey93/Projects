@@ -3,6 +3,8 @@ package domination;
 import java.util.Random;
 import java.util.Scanner;
 
+//this class creates a new random graph, with random edge connections
+//based on a probability. this class was provided by my professor
 class RandomGraph {
     public  int current_edge_weight;                     // used in
 							//    next_neighbor
@@ -132,24 +134,34 @@ class RandomGraph {
 
 }// end class graph
 
+//this class is the main class of the program
 public class Domination {
     public static void main(String[] args) {
         //vars
+        //time variables to track performance
         long startTime = System.currentTimeMillis();
         long finishTime;
+        
+        //file reading object
         Scanner in = new Scanner(System.in);
+        
+        //graph variables
         Random rand = new Random();
         RandomGraph[] graphs;
+        
+        //record the size/weight of the dominating/roman-dominating set for each graph
         int[] domSet;
         int[] romanWeight = null;
+        //record a truth value for every vertex of every graph for whether or not 
+        //it is in the dominating set
         int[][] D3 = null;
+        
         int numGraphs;
         int edgeProb;
         int numVerts;
-        int domIsLower = 0;
         long seed = -1;
         
-        //get input
+        //get input and init arrays
         System.out.print("Number of graphs to make? ");
         numGraphs = in.nextInt();
         domSet = new int[numGraphs];
@@ -177,7 +189,9 @@ public class Domination {
         int temp = 0, temp2 = 0, temp3 = 0;
         
         for(int i=0; i<numGraphs; i++) {
+            //get the adjacency matrix for the graph
             int[][] M = graphs[i].M;
+            //temporary dominating set
             int[] D = new int[graphs[i].vertices()];
             int[] D2 = new int[graphs[i].vertices()];
             for(int j=0; j<graphs[i].vertices(); j++) {
@@ -185,6 +199,11 @@ public class Domination {
             }
             int sizeOfDom = 0;
             temp=0;
+            //for each vertex in the graph as the "starting" vertex,
+            //add it to the dominating set, and flag it and all its neighbors
+            //as being dominated. move through the set until there is an undominated 
+            //vertex, then do the same for that vertex, putting it in the dom set
+            //and flagging it and all its neighbors as being dominated
             for(int v=0; v<graphs[i].vertices(); v++) {
                 for(int v2=v; temp<graphs[i].vertices(); temp++) {
                     v2 %= graphs[i].vertices();
@@ -223,12 +242,16 @@ public class Domination {
         
         //find roman weight for each graph
         temp = 0;
-        temp2 = 0;
+        //temp2 = 0;
         temp3 = 0;
         
         for(int i=0; i<numGraphs; i++) {
+            //get the adjacency matrix
             int[][] M = graphs[i].M;
+            //array for weight of each vertex
             int[] W = new int[graphs[i].vertices()];
+            //for each vertex, if it is in the dominating set of the graph give it a weight of a 2
+            //if not, give it a weight of 0
             for(int v=0; v<graphs[i].vertices(); v++) {
                 if(D3[i][v] == 1) {
                     W[v] = 2;
@@ -237,18 +260,24 @@ public class Domination {
                     W[v] = 0;
                 }
             }
+            //get the current weight of the graph
             temp = 0;
             for(int v=0; v<graphs[i].vertices(); v++) {
                 temp += W[v];
             }
             romanWeight[i] = temp;
             temp = 0;
+            //get rid of unnecessary twos
             for(int v=0; v<graphs[i].vertices(); v++) {
                 if(W[v] == 2) {
                     //check neighbors
+                    //for every neighbor of the current "2"
                     for(int n=0; n<graphs[i].vertices(); n++) {
+                        //if the neighbors weight is 0 and they are connected
                         if(W[n] == 0) {
                             if(M[v][n] == 1) {
+                                //go through every vertex, and if it is connected to the neighbor and
+                                //is a "2", increment temp
                                 for(int n2=0; n2<graphs[i].vertices(); n2++) {
                                     if(M[n][n2] == 1) {
                                         if(W[n2] == 2) {
@@ -258,19 +287,25 @@ public class Domination {
                                 }
                             }
                         }
+                        //if that vertex is connected to more than 1 "2", 2 may still be useless
+                        //refresh temp
                         if(temp > 1) {
                             temp = 0;
-                            temp2++;
+                            //temp2++;
                         }
+                        //if not, the 2 isn't useless, so we cannot make it a 1
                         else {
                             break;
                         }
+                        //if we haven't broken out of the loop yet, then the two is indeed useless,
+                        //and we can decrease the weight of the graph by making the two's weight a 1
                         if(n == graphs[i].vertices()) {
                             W[v] = 1;
                         }
                     }
                 }
             }
+            //now, take every 1 in the program, and set it's weight to 0 if it is connected to any other 2-weighted node
             for(int v=0; v<graphs[i].vertices(); v++) {
                 if(W[v] == 1) {
                     for(int n=0; n<graphs[i].vertices(); n++) {
@@ -282,6 +317,7 @@ public class Domination {
                     }
                 }
             }
+            //get the new weight
             temp = 0;
             for(int v=0; v<graphs[i].vertices(); v++) {
                 temp += W[v];

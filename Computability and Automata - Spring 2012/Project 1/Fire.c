@@ -10,15 +10,17 @@
 #include <stdbool.h>
 #include <unistd.h>
 
+//constants and global.
 const int height = 25;
 const int width = 25;
-int copTurns = 0, robberTurns = 0;
-int rx, ry, cx, cy;
-bool caught = false;
+int burned = 0;
+int pro = 0;
+int unpro = 0;
 
+//An enum to keep traqck of what each TILE_T is easily
+enum {EMPTY, UNPROTECTED, PROTECTED, BURNED};
 
-enum {COP, ROBBER, EMPTY};
-
+//A new type, TILE_T. These "objects" will be used in the grid.
 typedef struct
 {
     int x;
@@ -26,24 +28,21 @@ typedef struct
     int state;
 } TILE_T;
 
+//prototypes
 void drawGrid(TILE_T grid[height][width]);
-void moveRobber(TILE_T grid[height][width]);
-bool moveCops(TILE_T grid[height][width]);
+bool updateFire(TILE_T grid[height][width],bool go);
+void updateProtection(TILE_T grid[height][width], bool go);
 
+//main
 int main(void)
 {
-    printf("This program simulates a Robber being chased by one Cop.\n");
-    printf("This program was written by Tyler Tracey (n00767255).\n");
-    printf("The .'s simulate an empty space in the grid. The C is the\n");
-    printf("cop and the R is the robber. The flashing is due to the clrscrn\n");
-    printf("function. Sometimes the Robber and Cop will go off of the top of\n");
-    printf("the screen, but that is because of the height of the grid.\n");
-    printf("Thank you and enjoy grading. Press <ENTER> to begin the program:");
-    getchar();
-
+    //make an array of Tiles and set unpro to the appropriate amount
     TILE_T grid[height][width];
+    unpro = height*width;
+
     srand(time(NULL));
 
+    //make every tile in the array unprotected
     int i,j,ranHeight,ranWidth;
     for(i = 0; i<height; i++)
     {
@@ -51,168 +50,264 @@ int main(void)
         {
             grid[i][j].x = i;
             grid[i][j].y = j;
-            grid[i][j].state = EMPTY;
+            grid[i][j].state = UNPROTECTED;
         }
     }
 
+    //an explanation of what the program does. Specifically for the professor. Talks about
+    //a few flaws in the program as well.
+    printf("This is the FireFighter simulation, coded by Tyler Tracey.\n\n");
+    printf("\tThis program uses the letter F to simulate a burned area,\n");
+    printf("\t0's to simulate an unprotected area, and 1's to simulate\n");
+    printf("\ta protected space. The grid is %d by %d represented by ASCII\n",height,width);
+    printf("\tcharacters. There may be some slight flashing due to rapid\n");
+    printf("\tclearing of the terminal to redraw the grid cleanly. Also,\n");
+    printf("\tyou will have to close the program yourself. It will be clear\n");
+    printf("\tto you when execution is finished. I wanted to have a natural\n");
+    printf("\tpause similar to this one, but something wasn't working correctly.\n\n");
+    printf("\tPress [ENTER] to start the program");
+    getchar();
+
+    //clear the screen, draw the fresh grid, wait a second
+
+    drawGrid(grid);
+    sleep(1);
+
+    //start the fire in a random location
+    ranHeight = rand() % height;
+    ranWidth = rand() % width;
+
+    grid[ranHeight][ranWidth].state = BURNED;
+
+    //draw the grid with the new fire, inc and dec globals
+
+    burned++;
+    unpro--;
     drawGrid(grid);
     sleep(1);
 
     ranHeight = rand() % height;
     ranWidth = rand() % width;
 
-    rx = ranHeight;
-    ry = ranWidth;
-    grid[ranHeight][ranWidth].state = ROBBER;
+    grid[ranHeight][ranWidth].state = PROTECTED;
+
+    //same stuff for the first firefighter
+
+    pro++;
+    unpro--;
     drawGrid(grid);
     sleep(1);
 
-    ranHeight = rand() % height;
-    ranWidth = rand() % width;
+    bool spreadable = true;
 
-    cx = ranHeight;
-    cy = ranWidth;
-    grid[ranHeight][ranWidth].state = COP;
-    drawGrid(grid);
-    sleep(1);
-
-    while(!caught)
+    //whiel the fire is still spreading, update the grid continuously
+    while(spreadable)
     {
-        moveRobber(grid);
+        spreadable = updateFire(grid,spreadable);
+
         drawGrid(grid);
         sleep(1);
 
-        caught = moveCops(grid);
+        updateProtection(grid,spreadable);
+
         drawGrid(grid);
         sleep(1);
     }
 
+    //end prompt. NOT WORKING CORRECTLY. Sometimes it appears, sometimes it does not.
     printf("\tPress [ENTER] to end the program");
     getchar();
 
     return 0;
-}
+}//end main
 
+//draw function. displays the grid
 void drawGrid(TILE_T grid[height][width])
 {
     int i, j;
     system("cls");
 
+    //iterate through the grid drawing the appropriate symbol to the console for each tile
     for(i=0; i<height; i++)
     {
         for(j=0; j<width; j++)
         {
             if(grid[i][j].state == EMPTY)
             {
-                printf(". ");
+                printf("  ");
             }
-            else if(grid[i][j].state == COP)
+            else if(grid[i][j].state == UNPROTECTED)
             {
-                printf("C ");
+                printf("0 ");
             }
-            else if(grid[i][j].state == ROBBER)
+            else if(grid[i][j].state == PROTECTED)
             {
-                printf("R ");
+                printf("1 ");
+            }
+            else if(grid[i][j].state == BURNED)
+            {
+                printf("F ");
             }
         }
+        //if at the end of a row, print a newline
         printf("\n");
     }
 
-    printf("Cop Turns: %d\n",copTurns);
-    printf("Robber Turns: %d\n", robberTurns);
-    printf("Total Turns: %d\n", copTurns+robberTurns);
-}
+    float denom = 25.0*25.0;
 
+    //print info about the grid
+    printf("Burned: %d\n",burned);
+    printf("Protected: %d\n",pro);
+    printf("Unprotected: %d\n", unpro);
+    printf("Percent burned: %f\n",(burned/denom)*100);
+}//end draw
 
-void moveRobber(TILE_T grid[height][width])
+//updatefire function: updates the locations of the fire
+bool updateFire(TILE_T grid[height][width], bool go)
 {
-    robberTurns++;
-    int ran = rand() % 4;
-    bool changed = false;
+    int i,j,count=0,initial=0,iterator=0;
 
-    switch(ran)
+    //simply count how many burned tiles there are
+    for(i=0; i<height; i++)
     {
-        case 0:
-            grid[rx][ry].state = EMPTY;
-            rx++;
-            if(rx < 0)
+        if(!go)
+        {
+            break;
+        }
+
+        for(j=0; j<width; j++)
+        {
+            if(grid[i][j].state == BURNED)
             {
-                rx = width;
+                initial++;
             }
-            rx %= width;
+        }
+    }
+
+    TILE_T pGrid[initial];
+
+    //add all the burned tiles to a new, secondary array
+    for(i=0; i<height; i++)
+    {
+        if(!go)
+        {
             break;
-        case 1:
-            grid[rx][ry].state = EMPTY;
-            rx--;
-            if(rx < 0)
+        }
+        for(j=0; j<width; j++)
+        {
+            if(grid[i][j].state == BURNED)
             {
-                rx = width;
+                pGrid[count++] = grid[i][j];
             }
-            rx %= width;
+        }
+    }
+
+    count=0;
+
+    //iterate through the new array and change the tiles around each burned tile that CAN be changed
+    for(count=0; count<initial; count++)
+    {
+        if(!go)
+        {
             break;
-        case 2:
-            grid[rx][ry].state = EMPTY;
-            ry++;
-            if(ry < 0)
-            {
-                ry = height;
-            }
-            ry %= height;
-            break;
-        case 3:
-            grid[rx][ry].state = EMPTY;
-            ry--;
-            if(ry < 0)
-            {
-                ry = height;
-            }
-            ry %= height;
-            break;
-        default:
-            break;
+        }
+
+        //use the new array as indices for the old array
+        if(pGrid[count].x-1 > -1 && grid[pGrid[count].x-1][pGrid[count].y].state == UNPROTECTED)
+        {
+            grid[pGrid[count].x-1][pGrid[count].y].state = BURNED;
+            iterator++;
+            burned++;
+            unpro--;
+        }
+
+        if(pGrid[count].x+1 < width+1 && grid[pGrid[count].x+1][pGrid[count].y].state == UNPROTECTED)
+        {
+            grid[pGrid[count].x+1][pGrid[count].y].state = BURNED;
+            iterator++;
+            burned++;
+            unpro--;
+        }
+
+        if(pGrid[count].y-1 > -1 && grid[pGrid[count].x][pGrid[count].y-1].state == UNPROTECTED)
+        {
+            grid[pGrid[count].x][pGrid[count].y-1].state = BURNED;
+            iterator++;
+            burned++;
+            unpro--;
+        }
+
+        if(pGrid[count].y+1 < height && grid[pGrid[count].x][pGrid[count].y+1].state == UNPROTECTED)
+        {
+            grid[pGrid[count].x][pGrid[count].y+1].state = BURNED;
+            iterator++;
+            burned++;
+            unpro--;
+        }
     }
 
-    grid[rx][ry].state = ROBBER;
-
-}
-
-bool moveCops(TILE_T grid[height][width])
-{
-    copTurns++;
-    bool caught;
-
-    if(cx < rx)
+    //if nothing was burned, stop the loop in main
+    if(iterator == 0)
     {
-        grid[cx][cy].state = EMPTY;
-        cx++;
-        grid[cx][cy].state = COP;
-    }
-    else if(cx > rx)
-    {
-        grid[cx][cy].state = EMPTY;
-        cx--;
-        grid[cx][cy].state = COP;
-    }
-
-    if(cy < ry)
-    {
-        grid[cx][cy].state = EMPTY;
-        cy++;
-        grid[cx][cy].state = COP;
-    }
-    else if(cy > ry)
-    {
-        grid[cx][cy].state = EMPTY;
-        cy--;
-        grid[cx][cy].state = COP;
-    }
-
-    if(cx == rx && cy == ry)
-    {
-        return true;
+        return false;
     }
     else
     {
-        return false;
+        return true;
+    }
+}//end fire
+
+//updateProtection: updates the locations of the protected Tiles
+void updateProtection(TILE_T grid[height][width], bool go)
+{
+    static int firefighters = 0;
+    int i,j,x,y,count,check;
+    firefighters+=3;
+
+    //count how many unprotected spaces are left
+    for(i=0; i<height; i++)
+    {
+        if(!go)
+        {
+            break;
+        }
+
+        for(j=0; j<width; j++)
+        {
+            if(grid[i][j].state == UNPROTECTED)
+            {
+                count++;
+            }
+        }
+    }
+
+    //if there are less spaces than firefighters, we will use the as the loop condition instead
+    //of the numFireFighters.
+    if(count < firefighters)
+    {
+        check = count;
+    }
+    else
+    {
+        check = firefighters;
+    }
+
+    //protect as many unpro spaces as there are firefighters
+    for(i=0; i<check; )
+    {
+        x=rand() % width;
+        y=rand() % height;
+
+        if(grid[x][y].state == UNPROTECTED)
+        {
+            grid[x][y].state = PROTECTED;
+            i++;
+            pro++;
+            unpro--;
+        }
+        else
+        {
+            continue;
+        }
     }
 }

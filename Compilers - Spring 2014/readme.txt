@@ -1,12 +1,4 @@
-This project was the first project of my compilers class.
+Each project in this folder is a step through the creation of a compiler for my compilers class.
 
-This program takes in a file, a generates tokens for the use of a parser. 
-
-I've included a sample input file for you to use.
-
-To easily run this program, copy all files to a unix directory
-and run the commands:
->make
->p1 testfile.txt
-
-//p1 is a korn shell script
+Project 1 - Lexical Analyzer. Take a C- (pseudo language) input file, and divide it into tokens
+readable by the parser (next step in the compiler, coming soon).

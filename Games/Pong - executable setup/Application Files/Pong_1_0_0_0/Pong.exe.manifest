@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Pong.exe" version="1.0.0.0" publicKeyToken="ac306cbcac2b0c97" language="neutral" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="Game.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Pong" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="Pong.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Xna.Framework" version="4.0.0.0" publicKeyToken="842CF8BE1DE50553" language="neutral" processorArchitecture="x86" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Xna.Framework.Game" version="4.0.0.0" publicKeyToken="842CF8BE1DE50553" language="neutral" processorArchitecture="x86" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Xna.Framework.GamerServices" version="4.0.0.0" publicKeyToken="842CF8BE1DE50553" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Xna.Framework.Graphics" version="4.0.0.0" publicKeyToken="842CF8BE1DE50553" language="neutral" processorArchitecture="x86" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Xna.Framework.Input.Touch" version="4.0.0.0" publicKeyToken="842CF8BE1DE50553" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Pong.exe" size="16384">
+      <assemblyIdentity name="Pong" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>rIuf1WVI62MfopGeAuymzMPUIZY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Content\Fonts\Font.xnb" size="70830">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>dnLlwPMx796ShSMTDNBEGf490ho=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\Hit.xnb" size="1720">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>BAqwpeWnA7waJURRof747fKjGic=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\Me.wma" size="2832547">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>KlC+s6B27CAiDc4GI0VFyoyQDq8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\Me.xnb" size="120">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>IwlfNEJvg1Y+v/uT+7/Yu6txWog=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\Skism.wma" size="7413923">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>scmVeDGpY4NZkfUEXp+qR+V3yzg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Sounds\Skism.xnb" size="123">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>dEhFJAt3eGt06Wtwx0QcDJgxIHE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Textures\Ball.xnb" size="587">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>0tCVdKEVaKPtoH0+vpEBVDAVNvQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Textures\Paddle.xnb" size="6187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>NVefSaQCG2yqYpDodAgqdbyQiOY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Textures\Roof.xnb" size="44987">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Py2cam1SufdBlAkjoyry61nzFdo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Textures\SideWall.xnb" size="28987">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>UIwj159pzn33h2TvhKFZTG61qCs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Game.ico" size="4286">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>/y21PfwGnUAkwpPwwaFuIIyWENo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="GameThumbnail.png" size="5734">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>diNvdcDpDtGEMuMQIHpkKK3qVHc=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=MEGATRON\Tyler" issuerKeyHash="10f300dd872b0f7344879bbee544cc8210a73f73" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>IcEu9D9n96OLK1xrkrwBv2rf8qs=</DigestValue></Reference></SignedInfo><SignatureValue>EKP5iqZwlYckH2dNcejXdY+W1hi3c/NEvis08CKvRVc6v+yv55RCFjAhcesfhsWHTOZIhXLVGBOSaQ3a9g8Ldfc0b+1jD3NrMbIo5GE9HYOa4KEvKTNFEJ8ODP6l3zS3ae3SKPPE+vYKu47hC457774WBjvJxkxuwPqfx6FWBG4=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>6GQae66PFwHaIGB1l27XfpmtSIW2gT0lxKCcQzy+lQGFFBT22Ovq9UbPyfZuyjYYfNloZkKSlxb6nBtqSfKgQ2B0egkpG64gxDkQPvLPQBQWkhm1TK57JNTPkI7Z9bwExIUW2d/C6Lip4actfso2EjAvhfGtWiVIvaSlb+0f4o0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="abf2df6abf01bc926b5c2b8ba3f7673ff42ec121" Description="" Url=""><as:assemblyIdentity name="Pong.exe" version="1.0.0.0" publicKeyToken="ac306cbcac2b0c97" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=MEGATRON\Tyler</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>xBLm5k27JSUmZujelfoeIpMejRY=</DigestValue></Reference></SignedInfo><SignatureValue>Lg3kDO/CPqzS2CTbFXWxmNHGWBU0ncUxoUqDLW84JtrywIjFMqNIGyf1+xL8TNlZDQrvEl2hjqWAzoNGLWN/2RnUEn5QYWAg/O7zI10291lZ2LZh21lGaT/DlMwn8dvUDtLNQWP3udlPHKVPnmKAQL4P3xxLfYRJBCuzhM/Ajn4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>6GQae66PFwHaIGB1l27XfpmtSIW2gT0lxKCcQzy+lQGFFBT22Ovq9UbPyfZuyjYYfNloZkKSlxb6nBtqSfKgQ2B0egkpG64gxDkQPvLPQBQWkhm1TK57JNTPkI7Z9bwExIUW2d/C6Lip4actfso2EjAvhfGtWiVIvaSlb+0f4o0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB0TCCATqgAwIBAgIQWNmLmnt3VohLP9l7pdXMMTANBgkqhkiG9w0BAQUFADAnMSUwIwYDVQQDHhwATQBFAEcAQQBUAFIATwBOAFwAVAB5AGwAZQByMB4XDTE0MDIwMjA2NTAzOFoXDTE1MDIwMjEyNTAzOFowJzElMCMGA1UEAx4cAE0ARQBHAEEAVABSAE8ATgBcAFQAeQBsAGUAcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6GQae66PFwHaIGB1l27XfpmtSIW2gT0lxKCcQzy+lQGFFBT22Ovq9UbPyfZuyjYYfNloZkKSlxb6nBtqSfKgQ2B0egkpG64gxDkQPvLPQBQWkhm1TK57JNTPkI7Z9bwExIUW2d/C6Lip4actfso2EjAvhfGtWiVIvaSlb+0f4o0CAwEAATANBgkqhkiG9w0BAQUFAAOBgQDfzO+1EO/bXmeOgEDkLZL9u2Tv528HZXT5moo6f4qpEe7XAXPLnjIuwtSY2m9igP/gpzK3UFpnjE77ovM4j2k0UKhbd6dMsQTSMRUATBWrb6B7aS0CTljaA0RUY7bV/rJmMJFOyA88XDODvATOLwFVgF2dghEVYfmmPCADoFxzcA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
